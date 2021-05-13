@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-image: url('images/cropped-mandala-gold.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div class="header mb-5">
+    <nav class="navbar navbar-expand navbar-dark bg-dark mt-3">
+        <div class="container-fluid">
+            <img src="images/gb_logo.png" alt="" width="130" height="45" class="d-inline-block align-text-top">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="product-list.html">Product List</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="header-title text-center text-primary">
+        <h2>Products List</h2>
+    </div>
+</div>
+<div class="container">
+
+    <div class="button-block m-3" style=" cursor: pointer;">
+        <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal"
+            data-bs-target="#productAddModal"><span class="badge bg-primary px-1">+</span> Add Product</button></br>
+    </div>
+    <!-- table -->
+    <div class="card table-wrapper mt-3 shadow p-3 mb-5 bg-white rounded">
+        <table id="tblProduct" class="table table-hover">
+            <thead style="background-color: rgb(147, 148, 151);">
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Product Type</th>
+                    <th>Product Price</th>
+                    <th>Product Image</th>
+                    <th>Product Description</th>
+                    <th hidden>SellerId</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--table body content gose here-->
+            </tbody>
+        </table>
+    </div>
+    <!-- table end -->
+
+</div>
+<!-- container end -->
+
+<!-- ------------ Modals area --------------  -->
+
+<!-- Add Product Modal -->
+<div class="modal fade" id="productAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center text-primary" id="modelTitle"> Add Product
+                    <!-- Sign up or Update text goes here-->
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Product
+                            Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control form-control-sm" id="txtProductName" required>
+                            <!-- company name -->
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Product
+                            Type</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control form-control-sm" id="txtProductType" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Product
+                            Price</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control form-control-sm" id="txtProductPrice" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Product
+                            Image</label>
+                        <div class="col-sm-8">
+                            <input type="file" class="form-control form-control-sm" id="txtProductImage" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Related
+                            Field</label>
+                        <div class="col-sm-8">
+
+                            <select id="txtRelatedField" class="form-select form-control form-control-sm"
+                                placeholder="Choose Field.." required>
+                                <option value="IT">IT</option>
+                                <option value="MGT">Management</option>
+                                <option value="ENG">Engineering</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm"
+                            class="col-sm-4 col-form-label col-form-label-sm">Description</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control form-control-sm" id="txtDescription" required>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="txtSellerId" placeholder="seller id"
+                        required>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnModelAddProduct" class="btn btn-primary btn-sm">Save</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Update Modal -->
+<div class="modal fade" id="productUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center text-warning" id="exampleModalLabel">Update Product
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Product
+                            Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control form-control-sm" id="txtProductNameU" required>
+
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Product
+                            Price</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control form-control-sm" id="txtProductPriceU" required>
+
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Product
+                            Description</label>
+                        <div class="col-sm-8">
+                            <!--<input type="text" class="form-control form-control-sm" id="txtProductDescriptionU" required>-->
+
+                        </div>
+                    </div>
+                    <input type="hidden" class="form-control form-control-sm" id="txtSellerIdU" required>
+                    <input type="hidden" class="form-control form-control-sm" id="txtProductIdU" required>
+                    <textarea class="form-control" id="txtProductDescriptionU" rows="4" cols="50"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnModalUpdateProduct" class="btn btn-warning btn-sm"
+                    onclick="makePUTproductOnProduct()">Update</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="productDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center text-danger" id="modelTitle">Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm">Are you sure
+                            you want to delete this Product? </label>
+                    </div>
+                    <input type="hidden" class="form-control form-control-sm" id="txtSellerIdD" required>
+                    <input type="hidden" class="form-control form-control-sm" id="txtProductIdD" required>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">No</button>
+                <button type="button" id="btnModelAddProduct" class="btn btn-danger btn-sm"
+                    onclick="makeDELETEproductOnProduct()">Yes, Delete</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- bootstrap js cdn -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+    integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+    integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
+</script>
+
+<script src="scripts/product-function.js"></script>
+<script src="scripts/add-product.js"></script>
+
+</body>
+
+</html>
